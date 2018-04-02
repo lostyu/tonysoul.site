@@ -1,0 +1,31 @@
+{% extends 'blog/base.html' %} 
+{% load staticfiles %} 
+{% block main %}
+<div class="g-wrap">
+    <div class="g-pt60">
+        <div class="container">
+            <div id="j-modal" class="m-modal" style="display:none;">
+                <div class="cnt">
+                    <div class="container">
+                        <div class="inner">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="j-readList">
+                <div class="row m-readList">
+                    {% for read in read_list %}
+                    <div class="col-md-3 col-sm-6 col-xs-6"> <img data-id="{{read.id}}" src="{{read.thumbnail.url}}" title="{{read.title}}"> </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %} 
+{% block js %}
+    <script>
+    bookdata = {{ book_data | safe }}
+    </script>
+    <script src="{% static '/blog/js/book.js' %}"></script>
+{% endblock js %}

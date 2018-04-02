@@ -1,0 +1,33 @@
+<nav class="navbar navbar-inverse navbar-fixed-top m-header">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1><a class="navbar-brand" href="{% url 'blog:index' %}" title="Tony's Blog">Tony</a></h1>
+                <!--  -->
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right subnav">
+                    <li>
+                        <a href="{% url 'blog:read' %}" title="阅读">read</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:category' %}" title="分类">categories</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:tag' %}" title="标签">tags</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:archive' %}" title="归档">archive</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'blog:about' %}" title="关于">about</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>

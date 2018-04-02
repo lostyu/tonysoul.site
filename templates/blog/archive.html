@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% block left %}
+    <!-- S 归档 -->
+    <div class="m-archive">
+        {% for archive in archiveList %}
+            <div class="item">
+                <h2>{{archive.year}}</h2>
+                <ol class="m-list nobd">
+                    {% for post in postList %}
+                        
+                        {% if post.created_time|date:'Y' == archive|date:'Y' %}
+                        <li>
+                            <span class="time">{{post.created_time|date:'Y-m-d'}}</span>
+                            <a href="{% url 'blog:post' post.pk %}">{{post.title}}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
+                    
+                </ol>
+            </div>
+        {% endfor %}
+    </div>
+    <!-- E 归档 -->
+{% endblock left %}

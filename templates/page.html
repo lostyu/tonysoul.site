@@ -1,0 +1,52 @@
+{% if page_obj %}
+
+    <div class="m-page">
+        <!-- 左箭头，上一页 -->
+        {% if page_obj.has_previous %}
+        <a href="?page={{page_obj.previous_page_number}}" aria-label="Previous"><span aria-hidden="true">«</span></a>
+        {% else %}
+        <a href="javascript:;" aria-label="Previous"><span aria-hidden="true">«</span></a>
+        {% endif %}
+
+        <!-- 是否显示first -->
+        {% if first %}
+        <a href="?page=1">1</a>
+        {% endif %}
+
+        <!-- 是否显示省略号 -->
+        {% if lsymbol %}
+        <a href="javascript:;">...</a>
+        {% endif %}
+
+        <!-- 当前页左边的页码 -->
+        {% if left %} {% for l in left %}
+        <a href="?page={{l}}">{{l}}</a>
+        {% endfor %} {% endif %}
+
+        <!-- 当前页 -->
+        <a class="z-crt" href="?page={{page_obj.number}}">{{page_obj.number}} <span class="sr-only">(current)</span></a>
+
+        <!-- 当前页右边的页码 -->
+        {% if right %} {% for r in right %}
+        <a href="?page={{r}}">{{r}}</a>
+        {% endfor %} {% endif %}
+
+        <!-- 是否显示省略号 -->
+        {% if rsymbol %}
+        <a href="javascript:;">...</a>
+        {% endif %}
+
+        <!-- 是否显示last -->
+        {% if last %}
+        <a href="?page={{ paginator.num_pages }}">{{paginator.num_pages}}</a>
+        {% endif %}
+        
+        <!-- 右箭头，下一页 -->
+        {% if page_obj.has_next %}
+        <a href="?page={{page_obj.next_page_number}}" aria-label="Next"><span aria-hidden="true">»</span></a>
+        {% else %}
+        <a href="javascript:;" aria-label="Next"><span aria-hidden="true">»</span></a>
+        {% endif %}
+    </div>
+
+{% endif %}

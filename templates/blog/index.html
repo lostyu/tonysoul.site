@@ -1,0 +1,42 @@
+{% extends 'blog/base.html' %} 
+{% block left %}
+    <!-- S 文章列表 -->
+    <div class="m-articleList">
+        {% for post in post_list %}
+        <div class="item">
+            <div class="title">
+                <h2><a href="{% url 'blog:post' post.id %}">{{ post.title }}</a></h2>
+                <div class="meta">
+                    <span class="author">{{post.author}}</span>
+                    <span class="time">{{post.created_time|date:'Y-m-d'}}</span>
+                </div>
+            </div>
+            <div class="content">
+                <div class="text">
+                    {{post.body|safe|truncatechars_html:190}}<a href="{% url 'blog:post' post.id %}">[阅读全文]</a>
+                </div>
+            </div>
+            <div class="ft">
+                <div class="m-flag">
+                    <div class="unit">
+                        <span class="glyphicon glyphicon-folder-open"></span>
+                        <a href="{% url 'blog:categoryList' post.category.id %}" title="分类:{{post.category.name}}"> {{post.category.name}}</a>
+                    </div>
+                    {% if post.tag %}
+                    <div class="unit">
+                        <span class="glyphicon glyphicon-tags"></span> {% for tag in post.tag.all %}
+                        <a href="{% url 'blog:tagList' tag.id %}" title="标签:{{tag.name}}"> {{tag.name}}</a> {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- E 文章列表 -->
+    <!-- S 分页 -->
+    {% if is_paginated %} 
+        {% include 'page.html' %} 
+    {% endif %}
+    <!-- E 分页 -->
+{% endblock left %}

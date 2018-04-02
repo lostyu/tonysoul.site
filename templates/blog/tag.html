@@ -1,0 +1,56 @@
+{% extends 'blog/base.html' %} 
+{% block left %}
+    <div class="g-wrap2">
+        <!-- S tags -->
+        <div class="m-tags">
+            {% for tag in tagList %} 
+            {% if forloop.counter0 == 0 %}
+            <a class="btn btn-primary" href="#{{tag.name}}">
+                    {{tag.name}}
+                    <span class="badge">{{tag.num_post}}</span>
+                </a> {% elif forloop.counter0 == 1 %}
+            <a class="btn btn-info" href="#{{tag.name}}">
+                    {{tag.name}}
+                    <span class="badge">{{tag.num_post}}</span>
+                </a> {% elif forloop.counter0 == 2 %}
+            <a class="btn btn-success" href="#{{tag.name}}">
+                    {{tag.name}}
+                    <span class="badge">{{tag.num_post}}</span>
+                </a> {% else %}
+            <a href="#{{tag.name}}">
+                    {{tag.name}}
+                    <span class="badge">1</span>
+                </a> {% endif %} {% endfor %}
+        </div>
+        <!-- E tags -->
+        <!-- S m-tagList -->
+        <div class="m-tagList">
+
+            {% for tag in tagList %}
+            <div class="item">
+                <div class="hd">
+                    <div class="m-title">
+                        <h2 id="{{tag.name}}">{{tag.name}}</h2>
+                    </div>
+                </div>
+                <div class="bd">
+                    <ol class="m-list nobd">
+                        {% for post in post_list %}
+                            {% for item in post.tag.all %}
+                                {% if item.id == tag.id %}
+                                    <li>
+                                        <span class="time">{{post.created_time|date:'Y-m-d'}}</span>
+                                        <a href="{% url 'blog:post' post.id %}">{{post.title}}</a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </ol>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+        <!-- E m-tagList -->
+    </div>
+{% endblock left %}

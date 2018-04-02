@@ -1,0 +1,61 @@
+{% extends 'blog/base.html' %} 
+{% load blog_tags %}
+{% block left %}
+    <div class="m-articleList2">
+        <div class="m-title">
+            <h2>
+                {% if category_name %}
+                    分类：{{category_name}}
+                {% endif %}
+                
+                {% if tag_name %}
+                    标签：{{tag_name}}
+                {% endif %}
+                
+
+                {% if datetime %}
+                    归档：{{datetime|date:'Y-m'}}
+                {% endif %}
+            </h2>
+        </div>
+        {% for post in post_list %}
+        <div class="item">
+            <div class="title">
+                <h2><a href="{% url 'blog:post' post.id %}">{{ post.title }}</a></h2>
+                <div class="meta">
+                    <span class="author">{{post.author}}</span>
+                    <span class="time">{{post.created_time|date:'Y-m-d'}}</span> {% if tag_name %}
+                    <span class="cate">
+                                    分类：
+                                    <a href="{% url 'blog:categoryList' post.category.id %}" title="分类:{{post.category.name}}"> {{post.category.name}}</a>
+                                </span> {% endif %} {% if category_name %}
+                    <span>
+                                    标签：
+                                {% for tag in post.tag.all %}
+                                    <a href="{% url 'blog:tagList' tag.id %}" title="标签:{{tag.name}}"> {{tag.name}}</a>
+                                {% endfor %}
+                                </span> {% endif %} {% if datetime %}
+                    <span class="cate">
+                                    分类：
+                                    <a href="{% url 'blog:categoryList' post.category.id %}" title="分类:{{post.category.name}}"> {{post.category.name}}</a>
+                                </span>
+                    <span>
+                                    标签：
+                                {% for tag in post.tag.all %}
+                                    <a href="{% url 'blog:tagList' tag.id %}" title="标签:{{tag.name}}"> {{tag.name}}</a>
+                                {% endfor %}
+                                </span> {% endif %}
+                </div>
+            </div>
+            <div class="content">
+                {{post.body|remove_img|truncatechars:180}}<a href="{% url 'blog:post' post.id %}">[阅读全文]</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- S 分页 -->
+    {% if is_paginated %} 
+        {% include 'page.html' %} 
+    {% endif %}
+    <!-- E 分页 -->
+{% endblock left %}

@@ -1,0 +1,71 @@
+{% extends 'blog/base.html' %}
+{% load blog_tags %}
+{% block left %}
+<div class="m-posts">
+    <div class="content">
+        {{post_detail.body|safe}}
+		
+		{% if post_detail.reprint %}
+		<blockquote class="m-reprint">
+		  <p>原文地址：<a href="{{post_detail.reprint}}" target="_blank">{{post_detail.reprint}}</a></p>
+		</blockquote>
+		{% endif %}
+
+		<p class="m-end">END</p>
+
+
+
+        <div class="m-flag2">
+            <div class="unit">
+                <span class="glyphicon glyphicon-folder-open"></span>
+                <a href="{% url 'blog:categoryList' post_detail.category.id %}" title="分类:{{post_detail.category.name}}"> {{post_detail.category.name}}</a>
+            </div>
+            {% if post_detail.tag %}
+            <div class="unit">
+                <span class="glyphicon glyphicon-tags"></span> {% for tag in post_detail.tag.all %}
+                <a href="{% url 'blog:tagList' tag.id %}" title="标签:{{tag.name}}"> {{tag.name}}</a> {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% get_recommend post_detail.pk as recommend %}
+{% if recommend %}
+<div class="g-wrap2 f-mb60">
+	<div class="m-recommendList">
+		<h2>推荐文章</h2>
+		<ul>
+			{% for p in recommend %}
+			<li><a href="{% url 'blog:post' p.pk %}">{{p.title}}</a></li>
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endif %}
+
+<div class="g-wrap2">
+	<div class="row m-page2">
+		<div class="col-md-6">
+			<p>上一篇</p>
+			{% if prepage.title %}
+				<a href=" {% url 'blog:post' prepage.id %}">{{prepage.title}}</a>
+			{% else %}
+				无
+			{% endif %}
+			
+				
+			</a>
+		</div>
+		<div class="col-md-6">
+			<p>下一篇</p>
+			{% if nextpage.title %}
+				<a href=" {% url 'blog:post' nextpage.id %}">{{nextpage.title}}</a>
+			{% else %}
+				无
+			{% endif %}
+
+		</div>
+	</div>
+</div>
+{% endblock left %}

@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="{{site_keywords}}" />
+    <meta name="description" content="{{site_description}}" />
+    <title>{{site_title}}</title>
+    <link href='http://fonts.font.im/css?family=Muli' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="{% static '/blog/bootstrap/css/bootstrap.min.css' %}">
+    <!-- <link rel="stylesheet" href="{% static '/blog/css/highlights/github.css' %}"> -->
+    <link rel="stylesheet" href="{% static '/blog/css/code.css' %}">
+    <link rel="stylesheet" href="{% static '/blog/css/main.css' %}">
+</head>
+
+<body>
+    
+    {% include 'blog/inc_navbar.html' %}
+    {% include 'blog/inc_banner.html' %}
+
+    {% block main %}
+    <div class="g-wrap">
+        <div class="g-pt60">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-1 m-leftBox">
+                        {% block left %}
+                        {% endblock left %}
+                    </div>
+                    <div class="col-md-3">
+                        {% block right %}
+                            {% include 'blog/inc_side.html' %}
+                        {% endblock right %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock main %}
+    
+    <!-- S footer -->
+    <div class="m-footer">
+        <p class="copyright">COPYRIGHT © Tony <span class="j-date">2018</span></p>
+    </div>
+    <!-- E footer -->
+    <script src="{% static '/blog/js/jquery.min.js' %}"></script>
+    <script src="{% static '/blog/bootstrap/js/bootstrap.min.js' %}"></script>
+    {% block js %}
+    {% endblock js %}
+    <script src="{% static '/blog/js/loadBanner.js' %}"></script>
+    <script src="{% static '/blog/js/main.js' %}"></script>
+    <div style="position:absolute; bottom:0;visibility:hidden;">
+    <script src="https://s13.cnzz.com/z_stat.php?id=1273279876&web_id=1273279876" language="JavaScript"></script>
+    </div>
+</body>
+
+</html>

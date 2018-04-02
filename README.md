@@ -1,2 +1,0 @@
-# tonysoul.site
-tonysoul blog

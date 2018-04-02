@@ -1,0 +1,86 @@
+{% load blog_tags %}
+<div class="m-sidebox">
+    <div class="hd">
+        <h2>最新文章</h2>
+    </div>
+    <div class="bd">
+        {% get_recent_posts as recent_post_list %}
+        {% if recent_post_list %}
+            <ul>
+                {% for post in recent_post_list %}
+                <li><a href="{% url 'blog:post' post.pk %}">{{post.title}}</a></li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+<div class="m-sidebox">
+    <div class="hd">
+        <h2><a href="{% url 'blog:read' %}">阅读</a></h2>
+    </div>
+    <div class="bd">
+        {% get_read as read %}
+        {% if read != None %}
+            <p><a href="{{read.url}}" target="_blank"><img class="img-responsive" src="{{read.thumbnail.url}}" alt=""></a></p>
+            <p><a href="{{read.url}}" target="_blank">{{read.author}}</a> </p>
+            <p>{{read.pub_time|date:'Y-m'}}</p>
+        {% endif %}
+    </div>
+</div>
+<div class="m-sidebox">
+    <div class="hd">
+        <h2><a href="{% url 'blog:category' %}">分类</a></h2>
+    </div>
+    <div class="bd">
+        {% get_categories as category_list %}
+        <ul>
+            {% for category in category_list %}
+            <li><a href="{% url 'blog:categoryList' category.id %}">{{category.name}}</a> ({{category.num_post}})</li>
+            {% empty %}
+            暂无分类
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+<div class="m-sidebox">
+    <div class="hd">
+        <h2><a href="{% url 'blog:tag' %}">标签</a></h2>
+    </div>
+    <div class="bd">
+        {% get_tags as tag_list %}
+        {% if tag_list %}
+            <div class="tag">
+                {% for tag in tag_list %}
+                    <a href="{% url 'blog:tagList' tag.id %}">{{tag.name}}</a>
+                {% endfor %}
+            </div>
+        {% else %}
+            暂无标签
+        {% endif %}
+    </div>
+</div>
+<div class="m-sidebox">
+    <div class="hd">
+        <h2><a href="{% url 'blog:archive' %}">归档</a></h2>
+    </div>
+    <div class="bd">
+        {% archives as date_list %}
+        <ul>
+            {% for date in date_list %}
+            <li><a href="{% url 'blog:archiveList' date.year date.month %}">{{date.year}}年{{date.month}}月</a></li>
+            {% empty %}
+            暂无归档
+            {% endfor %}
+
+        </ul>
+    </div>
+</div>
+
+<div class="m-sidebox">
+    <div class="hd">
+        <h2>404</h2>
+    </div>
+    <div class="bd">
+        <a href="404">带宝贝回家</a>
+    </div>
+</div>
