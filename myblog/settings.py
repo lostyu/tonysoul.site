@@ -25,7 +25,7 @@ SECRET_KEY = '%6bbjis8=p6x+knqd2$@agkbkwv#9mlhi43n^^49(jf!3-tebm'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '.tonysoul.site']
 
 
 # Application definition
@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'myblog',
         'USER': 'root',
-        'PASSWORD': '456789',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '3306',
     }

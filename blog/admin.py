@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 import sys
+import importlib
 from django.contrib import admin
 from .models import Category, Tag, Post, Read, Column
 
-reload(sys)
-sys.setdefaultencoding('utf8')
+importlib.reload(sys)
 # Register your models here.
 
 
