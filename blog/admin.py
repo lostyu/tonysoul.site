@@ -1,10 +1,7 @@
 # -*- coding: utf-8 -*-
-import sys
-import importlib
 from django.contrib import admin
 from .models import Category, Tag, Post, Read, Column
 
-importlib.reload(sys)
 # Register your models here.
 
 
